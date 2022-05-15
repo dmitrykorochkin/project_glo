@@ -6,4 +6,10 @@ let fullPrice = 15000;
 let adaptive = true; 
 
 
-
+console.log('title', 'fullPrice', 'adaptive');
+console.log(screens.length);
+console.log("Стоимость верстки экранов " + screensPrice + " руб");
+console.log("Стоимость разработки сайта " + fullPrice + " руб");
+console.log(screens.toLowerCase());
+console.log(screens.split(","));
+console.log(fullPrice/(rollback/100));
