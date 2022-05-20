@@ -52,42 +52,4 @@ console.log("итоговая стоимость за вычетом откат�
             break;
     }
         
-//Function Expression
-const getAllServicePrices = function() {
-        return(servicePrice1 + servicePrice2);
-    };        
 
-getAllServicePrices();
-const allServicePrices = getAllServicePrices();
-console.log(allServicePrices);
-
-//function declaration
-function getFullPrice() {
-   return screensPrice + allServicePrices; 
-
-};
-
-getFullPrice();
-fullPrice = getFullPrice();
-console.log(fullPrice);
-
-
-const getTitle = str => {
-   if (str);
-   return str.charAt(0).toUpperCase() + str.slice(1);
-
-}
-
-getTitle(title);
-console.log(title);
-
-
-
-
-const getServicePercentPrices = function() {
-    return fullPrice - servicePercentPrice;
-}
-
-getServicePercentPrices();
-servicePercentPrice = getServicePercentPrices();
-console.log(servicePercentPrice);
