@@ -10,8 +10,8 @@ const service1 = prompt("Какой дополнительный тип услу
 const servicePrice1 = +prompt("Сколько это будет стоить?");
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
 const servicePrice2 = +prompt("Сколько это будет стоить?");
-const fullPrice = (screensPrice + servicePrice1 + servicePrice2);
-const servicePercentPrice = Math.ceil(fullPrice -(fullPrice * (rollback/100)));
+let fullPrice = (screensPrice + servicePrice1 + servicePrice2);
+let servicePercentPrice = Math.ceil(fullPrice -(fullPrice * (rollback/100)));
 
 
 
@@ -32,25 +32,62 @@ console.log("Процент отката посреднику за работу 
 // console.log(title);
 // console.log(adaptive);
 // console.log(screensPrice);
-// console.log(fullPrice);
+console.log('fullPrice ' + fullPrice);
 console.log("итоговая стоимость за вычетом отката посреднику " + servicePercentPrice + " руб");
 
 
     
-    switch(fullPrice) {
-        case fullPrice > 30000:
+    switch(true) {
+        case (fullPrice > 30000):
             console.log("Даем скидку в 10%");
             break;
-        case fullPrice > 15000 && fullPrice < 30000:
+        case ( 15000 < fullPrice && fullPrice <= 30000 ): 
             console.log("Даем скидку в 5%");
             break;
-        case fullPrice < 15000 && fullPrice > 0:
+        case  (0 < fullPrice && fullPrice <= 15000):
             console.log("Скидка не предусмотрена");
             break;
-        case fullPrice < 0:
-            console.log("Что то пошло не так");
+        default:
+            console.log('Что то пошло не так');
             break;
     }
         
+//Function Expression
+const getAllServicePrices = function() {
+        return(servicePrice1 + servicePrice2);
+    };        
 
-    
+getAllServicePrices();
+const allServicePrices = getAllServicePrices();
+console.log(allServicePrices);
+
+//function declaration
+function getFullPrice() {
+   return screensPrice + allServicePrices; 
+
+};
+
+getFullPrice();
+fullPrice = getFullPrice();
+console.log(fullPrice);
+
+
+const getTitle = str => {
+   if (str);
+   return str.charAt(0).toUpperCase() + str.slice(1);
+
+}
+
+getTitle(title);
+console.log(title);
+
+
+
+
+const getServicePercentPrices = function() {
+    return fullPrice - servicePercentPrice;
+}
+
+getServicePercentPrices();
+servicePercentPrice = getServicePercentPrices();
+console.log(servicePercentPrice);
