@@ -61,7 +61,7 @@ getAllServicePrices();
 const allServicePrices = getAllServicePrices();
 console.log(allServicePrices);
 
-//function declaration
+//function declaration,
 function getFullPrice() {
    return screensPrice + allServicePrices; 
 
