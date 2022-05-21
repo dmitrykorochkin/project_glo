@@ -76,20 +76,7 @@ const getTitle = function() {
 
 
 
-switch(true) {
-    case (fullPrice >= 30000):
-        console.log("Даем скидку в 10%");
-        break;
-    case ( 15000 < fullPrice && fullPrice < 30000 ): 
-        console.log("Даем скидку в 5%");
-        break;
-    case  (0 < fullPrice && fullPrice <= 15000):
-        console.log("Скидка не предусмотрена");
-        break;
-    default:
-        console.log('Что то пошло не так');
-        break;
-}   
+
   
 
 asking()
@@ -111,3 +98,18 @@ console.log(typeof adaptive);
 console.log(screens.length);
 console.log(screens.toLowerCase().split(', '));
 console.log("Стоимость верстки экранов " + screensPrice + " руб и Стоимость разработки сайта " + fullPrice + " руб");
+
+switch(true) {
+    case (fullPrice >= 30000):
+        console.log("Даем скидку в 10%");
+        break;
+    case ( 15000 < fullPrice && fullPrice < 30000 ): 
+        console.log("Даем скидку в 5%");
+        break;
+    case  (0 < fullPrice && fullPrice <= 15000):
+        console.log("Скидка не предусмотрена");
+        break;
+    default:
+        console.log('Что то пошло не так');
+        break;
+}   
