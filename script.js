@@ -24,7 +24,7 @@ const asking = function() {
     
 
     do  {
-        screensPrice = prompt("Сколько будет стоить данная работа?");
+        screensPrice = +prompt("Сколько будет стоить данная работа?");
     } while (!isNumber(screensPrice));
 
     adaptive = confirm("Нужен ли адаптив на сайте?"); 
@@ -75,10 +75,6 @@ const getTitle = function() {
 };
 
 
-
-
-  
-
 asking()
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
@@ -100,16 +96,16 @@ console.log(screens.toLowerCase().split(', '));
 console.log("Стоимость верстки экранов " + screensPrice + " руб и Стоимость разработки сайта " + fullPrice + " руб");
 
 switch(true) {
-    case (fullPrice >= 30000):
+    case (fullPrice > 30000):
         console.log("Даем скидку в 10%");
         break;
-    case ( 15000 < fullPrice && fullPrice < 30000 ): 
+    case ( fullPrice > 15000): 
         console.log("Даем скидку в 5%");
         break;
-    case  (0 < fullPrice && fullPrice <= 15000):
+    case  ( fullPrice > 0):
         console.log("Скидка не предусмотрена");
         break;
     default:
         console.log('Что то пошло не так');
-        break;
+        
 }   
