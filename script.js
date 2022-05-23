@@ -37,19 +37,19 @@ console.log("итоговая стоимость за вычетом откат�
 
 
     
-    switch(true) {
-        case (fullPrice > 30000):
-            console.log("Даем скидку в 10%");
-            break;
-        case ( 15000 < fullPrice && fullPrice <= 30000 ): 
-            console.log("Даем скидку в 5%");
-            break;
-        case  (0 < fullPrice && fullPrice <= 15000):
-            console.log("Скидка не предусмотрена");
-            break;
-        default:
-            console.log('Что то пошло не так');
-            break;
-    }
+switch(true) {
+    case (fullPrice > 30000):
+        console.log("Даем скидку в 10%");
+        break;
+    case ( fullPrice > 15000): 
+        console.log("Даем скидку в 5%");
+        break;
+    case  ( fullPrice > 0):
+        console.log("Скидка не предусмотрена");
+        break;
+    default:
+        console.log('Что то пошло не так');
+        
+}
         
 
