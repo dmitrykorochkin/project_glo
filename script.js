@@ -1,5 +1,42 @@
 'use strict';
 
+const title = document.getElementsByTagName('h1')[0];
+console.log(title);
+
+const calculationBtn = document.getElementsByClassName('handler_btn')[0];
+console.log(calculationBtn);
+
+const resetBtn = document.getElementsByClassName('handler_btn')[1];
+console.log(resetBtn);
+
+const plus = document.querySelector('.screen-btn');
+console.log(plus);
+
+const percent = document.querySelectorAll('.percent');
+console.log(percent);
+
+const number = document.querySelectorAll('.number');
+console.log(number);
+
+const rollback = document.querySelector('.rollback > .main-controls__range > input');
+console.log(rollback);
+
+const span = document.querySelector('.rollback > .main-controls__range > span');
+console.log(span);
+
+const totalInput = document.getElementsByClassName('total-input');
+for(let i = 0; i < totalInput.length; i++)
+console.log(totalInput[i]);
+
+let screenMain = document.querySelectorAll('.screen');
+console.log(screenMain);
+
+// если нужна не коллеция то вариант ниже
+
+let screensMain = document.querySelectorAll('.screen');
+for(let i = 0; i < screenMain.length; i++)
+console.log(screenMain[i]);
+
 const appData = {
     title: '',
     screens:[],
