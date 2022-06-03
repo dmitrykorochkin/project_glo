@@ -1,33 +1,57 @@
 'use strict';
-
+//Получить заголовок "Калькулятор верстки" через метод getElementsByTagName. (тэг h1, получить именно элемент, а не коллекцию)
 const title = document.getElementsByTagName('h1')[0];
 console.log(title);
 
+
+//Получить кнопки "Рассчитать" и "Сброс" через метод getElementsByClassName. (класс handler_btn)
 const calculationBtn = document.getElementsByClassName('handler_btn')[0];
 console.log(calculationBtn);
+
 
 const resetBtn = document.getElementsByClassName('handler_btn')[1];
 console.log(resetBtn);
 
+//Получить кнопку "+" под выпадающим списком через метод querySelector. (класс screen-btn)
 const plus = document.querySelector('.screen-btn');
 console.log(plus);
 
+
+//Получить все элементы с классом other-items в две разные переменные. В первую элементы у которых так же присутствует класс percent, во вторую элементы у которых так же присутствует класс number через метод querySelectorAll.
 const percent = document.querySelectorAll('.percent');
 console.log(percent);
 
 const number = document.querySelectorAll('.number');
 console.log(number);
 
-const rollback = document.querySelector('.rollback > .main-controls__range > input');
+
+//Получить input type=range через его родителя с классом rollback одним запросом через метод querySelector.
+const rollback = document.querySelector('.rollback').children[0].childNodes[1];
 console.log(rollback);
 
-const span = document.querySelector('.rollback > .main-controls__range > span');
+//Получить span с классом range-value через его родителя с классом rollback одним запросом через метод querySelector.
+const span = document.querySelector('.rollback').children[0].childNodes[3];
 console.log(span);
 
-const totalInput = document.getElementsByClassName('total-input');
-for(let i = 0; i < totalInput.length; i++)
-console.log(totalInput[i]);
 
+//Получить все инпуты с классом total-input справа через метод getElementsByClassName. (класс total-input, получить именно элементы, а не коллекции)
+const totalInputDev = document.getElementsByClassName('total-input')[0];
+console.log(totalInputDev);
+
+const totalInputScreen = document.getElementsByClassName('total-input')[1];
+console.log(totalInputScreen);
+
+const totalInputService = document.getElementsByClassName('total-input')[2];
+console.log(totalInputService);
+
+const totalInputPrice = document.getElementsByClassName('total-input')[3];
+console.log(totalInputPrice);
+
+const totalInputRollback = document.getElementsByClassName('total-input')[4];
+console.log(totalInputRollback);
+
+
+//Получить все блоки с классом screen в изменяемую переменную ( let ) через метод querySelectorAll (далее мы будем переопределять ее значение)
 let screenMain = document.querySelectorAll('.screen');
 console.log(screenMain);
 
@@ -36,6 +60,8 @@ console.log(screenMain);
 let screensMain = document.querySelectorAll('.screen');
 for(let i = 0; i < screenMain.length; i++)
 console.log(screenMain[i]);
+
+
 
 const appData = {
     title: '',
