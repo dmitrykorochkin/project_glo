@@ -21,7 +21,7 @@ const appData = {
     title: '',
     screens:[],
     screensPrice: 0,
-    rollback:60,
+    rollback:0,
     adaptive:true,
     servicesPercent:{},
     servicesNumber:{},
@@ -33,6 +33,10 @@ const appData = {
         appData.addTilte();
         calculationBtn.addEventListener('click', appData.start);
         plus.addEventListener('click', appData.addScreenBlock);
+        totalInputRollback.addEventListener('input', appData.rollbackInput);
+        rollback.addEventListener('input', appData.rollbackInput);
+       
+        
         
     },
     addTilte: function () {
@@ -47,7 +51,7 @@ const appData = {
         // appData.getServicePercentPrices();
 
         // appData.logger();
-        console.log(appData);
+        // console.log(appData);
         appData.showResult();
     },
 
@@ -66,6 +70,18 @@ const appData = {
             const input = screens.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
 
+
+            if (select.value === '') {
+                alert('Выберите тип экранов')
+                return;
+                
+            } 
+            if (input.value === '') {
+                alert('Введите кол-во типов экранов');
+                return
+                
+            }
+
             appData.screens.push({
                 id:index, 
                 name:selectName, 
@@ -73,7 +89,7 @@ const appData = {
             });
         });
 
-        console.log(appData.screens);
+        // console.log(appData.screens);
     },
 
     addServices:function() {
@@ -82,9 +98,9 @@ const appData = {
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
 
-            console.log(check);
-            console.log(label);
-            console.log(input);
+            // console.log(check);
+            // console.log(label);
+            // console.log(input);
             if (check.checked) {
                 appData.servicesPercent[label.textContent] = +input.value;
             }
@@ -97,9 +113,9 @@ const appData = {
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
 
-            console.log(check);
-            console.log(label);
-            console.log(input);
+            // console.log(check);
+            // console.log(label);
+            // console.log(input);
             if (check.checked) {
                 appData.servicesNumber[label.textContent] = +input.value;
             }
@@ -108,6 +124,15 @@ const appData = {
         });
 
         
+    },
+
+    rollbackInput: function(e) {
+        span.textContent = e.target.value + '%';
+        appData.rollback = span.textContent;
+        console.log(appData.rollback);
+        
+       
+        // console.log(value);
     },
 
     addScreenBlock: function() {
@@ -131,6 +156,7 @@ const appData = {
 
 
      getServicePercentPrices:function() {
+        
         appData.servicePercentPrice =  appData.fullPrice - (appData.fullPrice * (appData.rollback/100));
      },
      
@@ -138,10 +164,11 @@ const appData = {
 
 
      logger:function() {
-         console.log(appData.screens);
+        //  console.log(appData.screens);
      }  
 };
 appData.init();
+
 
 
 
