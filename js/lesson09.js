@@ -7,14 +7,14 @@ const plus = document.querySelector('.screen-btn');
 const percent = document.querySelectorAll('.other-items.percent');
 const number = document.querySelectorAll('.other-items.number');
 const rollback = document.querySelector('.rollback input');
-const span = document.querySelector('.rollback span');            //children[0].childNodes[3];
+const span = document.querySelector('.rollback span'); 
 const totalInputDev = document.getElementsByClassName('total-input')[0];
 const totalInputScreen = document.getElementsByClassName('total-input')[1];
 const totalInputService = document.getElementsByClassName('total-input')[2];
 const totalInputPrice = document.getElementsByClassName('total-input')[3];
-const totalInputRollback = document.getElementsByClassName('total-input')[4];
+let totalInputRollback = document.getElementsByClassName('total-input')[4];
 
-
+let inputCount = document.querySelector('.main-controls__input input');
 let screenMain = document.querySelectorAll('.screen');
 
 const appData = {
@@ -48,7 +48,7 @@ const appData = {
         
         appData.addPrices();
 
-        // appData.getServicePercentPrices();
+
 
         // appData.logger();
         // console.log(appData);
@@ -59,11 +59,14 @@ const appData = {
         totalInputDev.value = appData.screensPrice;
         totalInputService.value = appData.servicePricesPercent + appData.servicePricesNumber;
         totalInputPrice.value = appData.fullPrice;
+        totalInputRollback.value = appData.servicePercentPrice;
+        totalInputScreen.value = appData.screens; 
+       
     },
-
 
     addScreens: function() {
         screenMain = document.querySelectorAll('.screen');
+        
 
         screenMain.forEach(function(screens, index) {
             const select = screens.querySelector('select');
@@ -72,24 +75,25 @@ const appData = {
 
 
             if (select.value === '') {
-                alert('Выберите тип экранов')
+                alert('Выберите тип экранов');
                 return;
                 
             } 
             if (input.value === '') {
                 alert('Введите кол-во типов экранов');
-                return
+                return;
                 
             }
 
             appData.screens.push({
                 id:index, 
                 name:selectName, 
-                money: +select.value * +input.value
+                money: +select.value * +input.value,
+                count: inputCount.value
             });
         });
 
-        // console.log(appData.screens);
+        
     },
 
     addServices:function() {
@@ -98,13 +102,9 @@ const appData = {
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
 
-            // console.log(check);
-            // console.log(label);
-            // console.log(input);
             if (check.checked) {
                 appData.servicesPercent[label.textContent] = +input.value;
-            }
-            
+            }  
 
         });
 
@@ -113,26 +113,17 @@ const appData = {
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
 
-            // console.log(check);
-            // console.log(label);
-            // console.log(input);
             if (check.checked) {
                 appData.servicesNumber[label.textContent] = +input.value;
             }
-            
 
         });
-
-        
+ 
     },
 
     rollbackInput: function(e) {
-        span.textContent = e.target.value + '%';
+        span.textContent = e.target.value;
         appData.rollback = span.textContent;
-        console.log(appData.rollback);
-        
-       
-        // console.log(value);
     },
 
     addScreenBlock: function() {
@@ -151,16 +142,18 @@ const appData = {
             appData.servicePricesPercent += appData.screensPrice * (appData.servicesPercent[key]/100);
         }
 
+
         appData.fullPrice = appData.screensPrice + appData.servicePricesPercent + appData.servicePricesNumber; 
-    },
-
-
-     getServicePercentPrices:function() {
         
-        appData.servicePercentPrice =  appData.fullPrice - (appData.fullPrice * (appData.rollback/100));
-     },
+
+        appData.screens = inputCount.value;
+
+       appData.servicePercentPrice =  appData.fullPrice - (+appData.fullPrice * (appData.rollback/100));
+
      
- 
+
+        
+    },
 
 
      logger:function() {
