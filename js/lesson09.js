@@ -14,13 +14,14 @@ const totalInputService = document.getElementsByClassName('total-input')[2];
 const totalInputPrice = document.getElementsByClassName('total-input')[3];
 let totalInputRollback = document.getElementsByClassName('total-input')[4];
 
-let inputCount = document.querySelector('.main-controls__input input');
+
 let screenMain = document.querySelectorAll('.screen');
 
 const appData = {
     title: '',
     screens:[],
     screensPrice: 0,
+    screensCount: 0,
     rollback:0,
     adaptive:true,
     servicesPercent:{},
@@ -57,13 +58,12 @@ const appData = {
         totalInputService.value = appData.servicePricesPercent + appData.servicePricesNumber;
         totalInputPrice.value = appData.fullPrice;
         totalInputRollback.value = appData.servicePercentPrice;
-        totalInputScreen.value = appData.screens; 
+        totalInputScreen.value = appData.screensCount; 
        
     },
 
     addScreens: function() {
         screenMain = document.querySelectorAll('.screen');
-        
 
         screenMain.forEach(function(screens, index) {
             const select = screens.querySelector('select');
@@ -86,7 +86,7 @@ const appData = {
                 id:index, 
                 name:selectName, 
                 money: +select.value * +input.value,
-                count: inputCount.value
+                count: +input.value
             });
         });
 
@@ -124,13 +124,14 @@ const appData = {
     },
 
     addScreenBlock: function() {
+        
         screenMain = document.querySelectorAll('.screen');
 
         const cloneScreen = screenMain[0].cloneNode(true);
         screenMain[screenMain.length - 1].after(cloneScreen);
 
-
-       
+        
+        
     },
 
     addPrices: function() {
@@ -145,12 +146,17 @@ const appData = {
         for(let key in appData.servicesPercent) {
             appData.servicePricesPercent += appData.screensPrice * (appData.servicesPercent[key]/100);
         }
+        for (let screen of appData.screens) {
+            appData.screensCount += screen.count;
+        }
 
 
-        appData.fullPrice = appData.screensPrice + appData.servicePricesPercent + appData.servicePricesNumber; 
+        appData.fullPrice = +appData.screensPrice + appData.servicePricesPercent + appData.servicePricesNumber; 
+
+
         
+        // appData.screens = inputCount.value;
         
-        appData.screens = inputCount.value;
 
        appData.servicePercentPrice =  appData.fullPrice - (+appData.fullPrice * (appData.rollback/100));
 
