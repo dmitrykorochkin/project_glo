@@ -45,10 +45,7 @@ const appData = {
     start: function() {
         appData.addScreens();
         appData.addServices();
-        
         appData.addPrices();
-
-
 
         // appData.logger();
         // console.log(appData);
@@ -127,11 +124,18 @@ const appData = {
     },
 
     addScreenBlock: function() {
+        screenMain = document.querySelectorAll('.screen');
+
         const cloneScreen = screenMain[0].cloneNode(true);
         screenMain[screenMain.length - 1].after(cloneScreen);
+
+
+       
     },
 
     addPrices: function() {
+
+        
         for(let screen of appData.screens) {
             appData.screensPrice += +screen.money;
         }
@@ -145,7 +149,7 @@ const appData = {
 
         appData.fullPrice = appData.screensPrice + appData.servicePricesPercent + appData.servicePricesNumber; 
         
-
+        
         appData.screens = inputCount.value;
 
        appData.servicePercentPrice =  appData.fullPrice - (+appData.fullPrice * (appData.rollback/100));
