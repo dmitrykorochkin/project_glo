@@ -31,6 +31,7 @@ const appData = {
     servicePercentPrice:0,
     servicePricesPercent:0,
     servicePricesNumber:0,
+    isError: false,
     init: function () {
         appData.addTilte();
         calculationBtn.addEventListener('click', (e) => {
@@ -67,7 +68,7 @@ const appData = {
     },
 
     addScreens: function() {
-        screenMain = document.querySelectorAll('.screen');
+        // screenMain = document.querySelectorAll('.screen');
         
 
         screenMain.forEach(function(screens, index) {
@@ -83,7 +84,7 @@ const appData = {
                 count: +input.value
             });
 
-            screenMain = document.querySelectorAll('.screen');
+            // screenMain = document.querySelectorAll('.screen');
             
     
         });
@@ -118,9 +119,11 @@ const appData = {
  
     },
 
-    rollbackInput: function(e) {
-        span.textContent = e.target.value;
-        appData.rollback = span.textContent;
+    rollbackInput: function() {
+
+        span.textContent = rollback.value + '%';
+        appData.rollback = parseInt(span.textContent);
+        
     },
 
     addScreenBlock: function() {
@@ -165,9 +168,9 @@ const appData = {
     },
 
 
-    isError: false,
+    
     checkValue: function() {
-        screenMain = document.querySelectorAll('.screen');
+        
         appData.isError = false;
         screenMain.forEach(screen => {
             const select = screen.querySelector('select');
