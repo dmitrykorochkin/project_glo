@@ -19,6 +19,7 @@ let screenMain = document.querySelectorAll('.screen');
 
 
 const appData = {
+
     title: '',
     screens:[],
     screensPrice: 0,
@@ -32,68 +33,59 @@ const appData = {
     servicePricesPercent:0,
     servicePricesNumber:0,
     isError: false,
-    init: () => {
-        appData.addTilte();
+    init: function() {
+        console.log(this.init)
+        
+        this.addTilte();
         calculationBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            appData.checkValue();
+            this.checkValue.bind(this);
         });
-        plus.addEventListener('click', appData.addScreenBlock);
-        totalInputRollback.addEventListener('input', appData.rollbackInput);
-        rollback.addEventListener('input', appData.rollbackInput);
-       
-        
-        
+        plus.addEventListener('click', this.addScreenBlock.bind(this));
+        totalInputRollback.addEventListener('input', this.rollbackInput.bind(this));
+        rollback.addEventListener('input', this.rollbackInput.bind(this)); 
+        console.log(this);
     },
+
     addTilte: () => {
         document.title = title.textContent;
     },
     start: () => {
-        appData.addScreens();
-        appData.addServices();
-        appData.addPrices();
-
-        // appData.logger();
-        // console.log(appData);
-        appData.showResult();
+        this.addScreens.apply(this);
+        this.addServices.apply(this);
+        this.addPrices.apply(this);
+        this.logger.apply(this);
+        this.showResult.apply(this);
     },
 
-    showResult: function () {
-        totalInputDev.value = appData.screensPrice;
-        totalInputService.value = appData.servicePricesPercent + appData.servicePricesNumber;
-        totalInputPrice.value = appData.fullPrice;
-        totalInputRollback.value = appData.servicePercentPrice;
-        totalInputScreen.value = appData.screensCount; 
+    showResult:  () => {
+        totalInputDev.value = this.screensPrice;
+        totalInputService.value = this.servicePricesPercent + this.servicePricesNumber;
+        totalInputPrice.value = this.fullPrice;
+        totalInputRollback.value = this.servicePercentPrice;
+        totalInputScreen.value = this.screensCount; 
        
     },
 
     addScreens: () => {
-        // screenMain = document.querySelectorAll('.screen');
         
-
         screenMain.forEach((screens, index) => {
             const select = screens.querySelector('select');
             const input = screens.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
             
 
-            appData.screens.push({
+            this.screens.push({
                 id:index, 
                 name:selectName, 
                 money: +select.value * +input.value,
                 count: +input.value
             });
-
-            // screenMain = document.querySelectorAll('.screen');
             
-    
         });
-        
         
     },
 
-
-   
     addServices:() => {
         percent.forEach((item) => {
             const check = item.querySelector('input[type=checkbox]');
@@ -101,7 +93,7 @@ const appData = {
             const input = item.querySelector('input[type=text]');
 
             if (check.checked) {
-                appData.servicesPercent[label.textContent] = +input.value;
+                this.servicesPercent[label.textContent] = +input.value;
             }  
 
         });
@@ -112,7 +104,7 @@ const appData = {
             const input = item.querySelector('input[type=text]');
 
             if (check.checked) {
-                appData.servicesNumber[label.textContent] = +input.value;
+                this.servicesNumber[label.textContent] = +input.value;
             }
 
         });
@@ -122,13 +114,12 @@ const appData = {
     rollbackInput: () => {
 
         span.textContent = rollback.value + '%';
-        appData.rollback = parseInt(span.textContent);
+        this.rollback = parseInt(span.textContent);
         
     },
 
     addScreenBlock: () => {
         
-
         const cloneScreen = screenMain[0].cloneNode(true);
         screenMain[screenMain.length - 1].after(cloneScreen);
        
@@ -142,54 +133,49 @@ const appData = {
 
     },
 
-    
-
     addPrices: () => {
 
         
-        for(let screen of appData.screens) {
-            appData.screensPrice += +screen.money;
+        for(let screen of this.screens) {
+            this.screensPrice += +screen.money;
         }
-        for(let key in appData.servicesNumber) {
-            appData.servicePricesNumber += appData.servicesNumber[key];
+        for(let key in this.servicesNumber) {
+            this.servicePricesNumber += this.servicesNumber[key];
         }
-        for(let key in appData.servicesPercent) {
-            appData.servicePricesPercent += appData.screensPrice * (appData.servicesPercent[key]/100);
+        for(let key in this.servicesPercent) {
+            this.servicePricesPercent += this.screensPrice * (this.servicesPercent[key]/100);
         }
-        for (let screen of appData.screens) {
-            appData.screensCount += screen.count;
+        for (let screen of this.screens) {
+            this.screensCount += screen.count;
         }
 
 
-        appData.fullPrice = +appData.screensPrice + appData.servicePricesPercent + appData.servicePricesNumber; 
+        this.fullPrice = +this.screensPrice + this.servicePricesPercent + this.servicePricesNumber; 
 
-       appData.servicePercentPrice =  appData.fullPrice - (+appData.fullPrice * (appData.rollback/100));
+       this.servicePercentPrice =  this.fullPrice - (+this.fullPrice * (this.rollback/100));
         
     },
-
-
     
     checkValue: () => {
         
-        appData.isError = false;
+        this.isError = false;
         screenMain.forEach(screen => {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
             if (select.value === '' || input.value === '') {
-                appData.isError = true;
+                this.isError = true;
             }
         });
 
-        if(!appData.isError) {
-            appData.start();
+        if(!this.isError) {
+            this.start();
         } else {
             alert('Заполните поле');
         }
     },
 
-
      logger: () => {
-        //  console.log(appData.screens);
      }  
 };
+
 appData.init();
