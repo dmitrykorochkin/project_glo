@@ -45,7 +45,6 @@ const appData = {
         totalInputRollback.addEventListener('input', this.rollbackInput.bind(this));
         rollback.addEventListener('input', this.rollbackInput.bind(this)); 
         resetBtn.addEventListener('click', this.reset.bind(this));
-        console.log(resetBtn)
     },
 
     addTilte: function() {
@@ -58,8 +57,6 @@ const appData = {
         this.logger();
         this.showResult();
     },
-
-
     reset: function() {
         this.resetScreens()
         this.resetBtn()
@@ -96,8 +93,7 @@ const appData = {
             select.value = '';
             select.disabled = false;
         });
-        this.screens = []
-        console.log(screens);
+        this.screens = [];
     },
     resetBtn: function() {
         calculationBtn.style = "display";
@@ -141,7 +137,6 @@ const appData = {
         plus.disabled = true;
         screenMain.disabled = true;
         rollback.disabled = true;
-       
     },
 
     addScreens: function() {
@@ -151,7 +146,6 @@ const appData = {
             const input = screens.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
             
-
             this.screens.push({
                 id:index, 
                 name:selectName, 
@@ -198,8 +192,7 @@ const appData = {
     rollbackInput: function() {
 
         span.textContent = rollback.value + '%';
-        this.rollback = parseInt(span.textContent);
-        
+        this.rollback = parseInt(span.textContent);     
     },
 
     addScreenBlock: function() {
@@ -207,13 +200,11 @@ const appData = {
         const cloneScreen = screenMain[0].cloneNode(true);
         screenMain[screenMain.length - 1].after(cloneScreen);
        
-        
         let mainInput = cloneScreen.querySelector('.screen input');
-        console.log(mainInput);
         mainInput.value = '';
 
         screenMain = document.querySelectorAll('.screen');
-        console.log(screenMain);
+        
 
     },
 
