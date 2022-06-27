@@ -38,7 +38,7 @@ const appData = {
         this.addTilte();
         calculationBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            this.checkValue();
+            this.checkValue.apply(this);
         });
         plus.addEventListener('click', this.addScreenBlock.bind(this));
         
@@ -81,12 +81,12 @@ const appData = {
 
     },
     resetScreens: function () {
-        let screens = document.querySelectorAll('.screen');
-        screens.forEach((item, index) => {
+       
+        screenMain.forEach((item, index) => {
             const select = item.querySelector('select');
             const input = item.querySelector('input');
             if (index >= 1) {
-                screens[index].remove();
+                screenMain[index].remove();
             }
             input.value = '';
             input.disabled = false;
@@ -94,6 +94,7 @@ const appData = {
             select.disabled = false;
         });
         this.screens = [];
+        screenMain = document.querySelectorAll('.screen');
     },
     resetBtn: function() {
         calculationBtn.style = "display";
@@ -196,14 +197,18 @@ const appData = {
     },
 
     addScreenBlock: function() {
+
+        
         
         const cloneScreen = screenMain[0].cloneNode(true);
-        screenMain[screenMain.length - 1].after(cloneScreen);
-       
         let mainInput = cloneScreen.querySelector('.screen input');
         mainInput.value = '';
 
+        screenMain[screenMain.length - 1].after(cloneScreen);
+       
+        
         screenMain = document.querySelectorAll('.screen');
+
         
 
     },
@@ -244,6 +249,7 @@ const appData = {
 
         if(!this.isError) {
             this.start();
+            
         } else {
             alert('Заполните поле');
         }
