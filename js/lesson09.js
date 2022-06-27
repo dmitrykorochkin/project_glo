@@ -58,11 +58,11 @@ const appData = {
         this.showResult();
     },
     reset: function() {
-        this.resetScreens()
-        this.resetBtn()
-        this.resetRollBack()
-        this.resetServices()
-        this.resetTotalInputs()
+        this.resetScreens();
+        this.resetBtn();
+        this.resetRollBack();
+        this.resetServices();
+        this.resetTotalInputs();
     },
     resetTotalInputs: function() {
         totalInputDev.value = 0;
@@ -114,7 +114,7 @@ const appData = {
                 check.checked = !check.checked; 
             }
             check.disabled = false;
-        })
+        });
 
         number.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
@@ -124,8 +124,6 @@ const appData = {
             check.disabled = false;
         });
     },
-
-
 
     showResult:  function() {
         totalInputDev.value = this.screensPrice;
@@ -198,19 +196,13 @@ const appData = {
 
     addScreenBlock: function() {
 
-        
-        
         const cloneScreen = screenMain[0].cloneNode(true);
+        screenMain[screenMain.length - 1].after(cloneScreen);
+
         let mainInput = cloneScreen.querySelector('.screen input');
         mainInput.value = '';
-
-        screenMain[screenMain.length - 1].after(cloneScreen);
-       
-        
+    
         screenMain = document.querySelectorAll('.screen');
-
-        
-
     },
 
     addPrices: function() {
